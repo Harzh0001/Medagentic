@@ -27,7 +27,9 @@ RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTr
 EXPOSE 8000 8501
 
 # Start both FastAPI + Streamlit with a simple bash script
+# FastAPI runs on internal port 8000 (Streamlit hits it via localhost:8000 internally)
+# Streamlit runs on the dynamically injected $PORT variable from Railway
 CMD ["bash", "-lc", "\
     uvicorn main:app --host 0.0.0.0 --port 8000 & \
-    streamlit run ui/chat.py --server.port 8501 --server.address 0.0.0.0 --server.headless true \
+    streamlit run ui/chat.py --server.port ${PORT:-8501} --server.address 0.0.0.0 --server.headless true \
   "]
