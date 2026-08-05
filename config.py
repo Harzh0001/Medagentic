@@ -6,14 +6,13 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env")
 
     zen_api_key: str = ""
-    zen_base_url: str = "https://api.opencode.ai/v1"
+    zen_base_url: str | None = None
     zen_model: str = "gpt-4o-mini"
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        # Fix legacy incorrect base URL if user has it stuck in Streamlit secrets
-        if self.zen_base_url == "https://opencode.ai/api/v1" or self.zen_base_url == "https://opencode.ai/zen/v1":
-            self.zen_base_url = "https://api.opencode.ai/v1"
+        if self.zen_base_url and "opencode.ai" in self.zen_base_url:
+            self.zen_base_url = None
 
     pubmed_base: str = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
     top_k: int = 6
