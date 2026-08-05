@@ -497,4 +497,4 @@ else:
                         
                         st.rerun() # Refresh to update timeline
                     except Exception as exc:
-                        st.error(f"Could not reach the API at localhost:8000.\n{exc}")
+                        st.error(f"An error occurred while answering your question: {exc}")

@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env")
 
     zen_api_key: str = ""
-    zen_base_url: str = "https://opencode.ai/api/v1"
+    zen_base_url: str = "https://api.opencode.ai/v1"
     zen_model: str = "gpt-4o-mini"
 
     pubmed_base: str = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
