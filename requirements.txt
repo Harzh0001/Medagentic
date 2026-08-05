@@ -1,3 +1,5 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.3.1+cpu
 requests==2.32.3
 pydantic==2.7.4
 pydantic-settings==2.3.4
