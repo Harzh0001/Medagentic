@@ -10,8 +10,9 @@ async def run_translator(answer: str, language: str, llm) -> str:
     The target language is: {language}.
     If the target language is NOT English, translate the simplified text into {language} accurately, ensuring cultural appropriateness.
     
-    Text to translate/simplify:
+    <source_text>
     {answer}
+    </source_text>
     """
     
     # We don't need the whole conversation history for translation, just the final answer
