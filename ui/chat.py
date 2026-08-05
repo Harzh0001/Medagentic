@@ -304,22 +304,26 @@ header {visibility: hidden;}
 """
 st.markdown(CSS, unsafe_allow_html=True)
 
-# MEDICAL CROSS SVG
-CROSS_SVG = """<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path d="M10.5 3H13.5V9.5H20V12.5H13.5V19H10.5V12.5H4V9.5H10.5V3Z"/>
-</svg>"""
+import base64
+def get_logo_base64():
+    logo_path = Path(__file__).resolve().parent.parent / "assets" / "logo.png"
+    if logo_path.exists():
+        with open(logo_path, "rb") as f:
+            return base64.b64encode(f.read()).decode()
+    return ""
+
+LOGO_B64 = get_logo_base64()
+LOGO_IMG_TAG = f'<img src="data:image/png;base64,{LOGO_B64}" alt="Mediate Logo" style="height: 40px; object-fit: contain;">'
+
 
 def render_top_nav():
     button_label = "Sign out" if st.session_state.logged_in else "Sign in"
     nav_html = f"""
 <div class="top-nav">
 <div class="nav-left">
-<div class="nav-icon">
-{CROSS_SVG}
-</div>
-<div class="nav-titles">
-<div class="nav-brand">Mediate</div>
-<div class="nav-subtitle">Medical question assistant</div>
+{LOGO_IMG_TAG}
+<div class="nav-titles" style="margin-left: 10px; justify-content: center;">
+<div class="nav-subtitle" style="margin-top: 4px;">Medical question assistant</div>
 </div>
 </div>
 <div class="nav-right">
@@ -346,7 +350,7 @@ if not st.session_state.logged_in:
     html_hero = f"""
 <div class="main-content">
 <div class="hero-icon">
-{CROSS_SVG}
+<img src="data:image/png;base64,{LOGO_B64}" alt="Mediate Logo" style="height: 60px; object-fit: contain;">
 </div>
 <div class="hero-title">Ask a wellness or health education question</div>
 <div class="hero-subtitle">Explore wellness topics, health information, and self-care. This educational assistant provides general wellness information and is explicitly not a diagnostic tool.</div>
@@ -418,10 +422,10 @@ else:
 
     st.markdown(f"""
 <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px; margin-bottom: 20px;">
-    <div style="color: var(--teal-dark); margin-bottom: 16px; width:48px; height:48px; display: flex; justify-content:center; align-items:center;">
-        {CROSS_SVG}
+    <div style="margin-bottom: 16px; display: flex; justify-content:center; align-items:center;">
+        <img src="data:image/png;base64,{LOGO_B64}" alt="Mediate Logo" style="height: 60px; object-fit: contain;">
     </div>
-    <div style="font-size: 20px; font-weight: 500; color: var(--text-main);">Mediate Wellness & Health Education</div>
+    <div style="font-size: 20px; font-weight: 500; color: var(--text-main);">Wellness & Health Education</div>
 </div>
 """, unsafe_allow_html=True)
     
