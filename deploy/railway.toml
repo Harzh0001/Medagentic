@@ -1,0 +1,25 @@
+# MedAgentic Railway Deployment Config
+# Uses Dockerfile in deploy/
+# Services: FastAPI backend + Streamlit frontend
+
+[build]
+builder = "dockerfile"
+dockerfilePath = "deploy/Dockerfile"
+
+[deploy]
+healthcheckPath = "/"
+healthcheckTimeout = 120
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 5
+
+# Backend service (FastAPI)
+[[services]]
+name = "api"
+internalPort = 8000
+protocol = "http"
+
+# Frontend service (Streamlit)
+[[services]]
+name = "ui"
+internalPort = 8501
+protocol = "http"

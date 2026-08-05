@@ -1,0 +1,179 @@
+{
+  "corpus_size": 210,
+  "queries": 8,
+  "recall@1": 0.0,
+  "recall@3": 0.25,
+  "recall@5": 0.375,
+  "mrr": 0.18035714285714285,
+  "ndcg@5": 0.125,
+  "rows": [
+    {
+      "query": "first-line pharmacotherapy for type 2 diabetes",
+      "hits": {
+        "1": false,
+        "3": false,
+        "5": true,
+        "10": true
+      },
+      "mrr": 0.2,
+      "ndcg@5": 0.2,
+      "top_sources": [
+        "test1.pdf",
+        "test1.pdf",
+        "test1.pdf"
+      ],
+      "top_scores": [
+        0.631,
+        0.597,
+        0.592
+      ]
+    },
+    {
+      "query": "GLP-1 receptor agonist cardiovascular benefit",
+      "hits": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false
+      },
+      "mrr": 0.0,
+      "ndcg@5": 0.0,
+      "top_sources": [
+        "test1.pdf",
+        "test1.pdf",
+        "test1.pdf"
+      ],
+      "top_scores": [
+        0.651,
+        0.633,
+        0.627
+      ]
+    },
+    {
+      "query": "SGLT2 inhibitor heart failure hospitalization prevention",
+      "hits": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": false
+      },
+      "mrr": 0.0,
+      "ndcg@5": 0.0,
+      "top_sources": [
+        "test1.pdf",
+        "test1.pdf",
+        "test1.pdf"
+      ],
+      "top_scores": [
+        0.684,
+        0.656,
+        0.633
+      ]
+    },
+    {
+      "query": "continuous glucose monitoring type 1 diabetes standard of care",
+      "hits": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": true
+      },
+      "mrr": 0.14285714285714285,
+      "ndcg@5": 0.0,
+      "top_sources": [
+        "test1.pdf",
+        "test1.pdf",
+        "test1.pdf"
+      ],
+      "top_scores": [
+        0.684,
+        0.667,
+        0.664
+      ]
+    },
+    {
+      "query": "metformin eGFR threshold contraindication",
+      "hits": {
+        "1": false,
+        "3": true,
+        "5": true,
+        "10": true
+      },
+      "mrr": 0.3333333333333333,
+      "ndcg@5": 0.3333333333333333,
+      "top_sources": [
+        "test1.pdf",
+        "test1.pdf",
+        "ADA_Standards_2026_Ch9_Pharmacologic_Approaches.md"
+      ],
+      "top_scores": [
+        0.573,
+        0.563,
+        0.559
+      ]
+    },
+    {
+      "query": "insulin initiation criteria severe hyperglycemia",
+      "hits": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": true
+      },
+      "mrr": 0.1,
+      "ndcg@5": 0.0,
+      "top_sources": [
+        "test1.pdf",
+        "test1.pdf",
+        "test1.pdf"
+      ],
+      "top_scores": [
+        0.547,
+        0.531,
+        0.527
+      ]
+    },
+    {
+      "query": "dual GIP GLP-1 receptor agonist heart failure preserved ejection fraction",
+      "hits": {
+        "1": false,
+        "3": false,
+        "5": false,
+        "10": true
+      },
+      "mrr": 0.16666666666666666,
+      "ndcg@5": 0.0,
+      "top_sources": [
+        "test1.pdf",
+        "test1.pdf",
+        "test1.pdf"
+      ],
+      "top_scores": [
+        0.528,
+        0.522,
+        0.51
+      ]
+    },
+    {
+      "query": "chronic kidney disease diabetes preferred glucose lowering medication",
+      "hits": {
+        "1": false,
+        "3": true,
+        "5": true,
+        "10": true
+      },
+      "mrr": 0.5,
+      "ndcg@5": 0.4666666666666666,
+      "top_sources": [
+        "test1.pdf",
+        "ADA_Standards_2026_Ch9_Pharmacologic_Approaches.md",
+        "test1.pdf"
+      ],
+      "top_scores": [
+        0.676,
+        0.662,
+        0.657
+      ]
+    }
+  ]
+}

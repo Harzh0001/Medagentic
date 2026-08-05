@@ -1,0 +1,86 @@
+{
+  "queries": 6,
+  "mean_faithfulness": 0.583,
+  "mean_citation_coverage": 0.667,
+  "mean_unsupported_claims": 0.333,
+  "reports": [
+    {
+      "question": "first-line pharmacotherapy for type 2 diabetes",
+      "status": "ok",
+      "faithfulness": 1.0,
+      "citation_coverage": 1.0,
+      "unsupported_claims": 0.0,
+      "cited_numbers": [
+        1,
+        2
+      ],
+      "citations_available": 6
+    },
+    {
+      "question": "GLP-1 receptor agonist cardiovascular benefit",
+      "status": "ok",
+      "faithfulness": 1.0,
+      "citation_coverage": 1.0,
+      "unsupported_claims": 0.0,
+      "cited_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "citations_available": 6
+    },
+    {
+      "question": "SGLT2 inhibitor heart failure hospitalization prevention",
+      "status": "ok",
+      "faithfulness": 0.5,
+      "citation_coverage": 0.667,
+      "unsupported_claims": 0.333,
+      "cited_numbers": [
+        2,
+        3,
+        6
+      ],
+      "citations_available": 6
+    },
+    {
+      "question": "continuous glucose monitoring type 1 diabetes standard of care",
+      "status": "ok",
+      "faithfulness": 0.5,
+      "citation_coverage": 0.667,
+      "unsupported_claims": 0.333,
+      "cited_numbers": [
+        2,
+        3,
+        4
+      ],
+      "citations_available": 6
+    },
+    {
+      "question": "metformin eGFR threshold contraindication",
+      "status": "ok",
+      "faithfulness": 0.0,
+      "citation_coverage": 0.0,
+      "unsupported_claims": 1.0,
+      "cited_numbers": [
+        3,
+        5
+      ],
+      "citations_available": 6
+    },
+    {
+      "question": "insulin initiation criteria severe hyperglycemia",
+      "status": "ok",
+      "faithfulness": 0.5,
+      "citation_coverage": 0.667,
+      "unsupported_claims": 0.333,
+      "cited_numbers": [
+        1,
+        2,
+        5
+      ],
+      "citations_available": 6
+    }
+  ]
+}
