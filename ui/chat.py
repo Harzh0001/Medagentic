@@ -452,8 +452,12 @@ else:
             with st.chat_message("assistant"):
                 with st.spinner("Analyzing and answering…"):
                     try:
+                        # Use environment variable for deployment, fallback to localhost
+                        import os
+                        api_base = os.getenv("API_URL", "http://localhost:8000")
+                        
                         r = httpx.post(
-                            "http://localhost:8000/v1/chat",
+                            f"{api_base}/v1/chat",
                             json={
                                 "message": query, 
                                 "thread_id": st.session_state.thread_id,
