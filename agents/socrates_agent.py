@@ -1,12 +1,12 @@
 from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
 
 async def run_socrates(messages: list[BaseMessage], llm) -> dict:
-    prompt = """You are a wellness educator gathering symptom information.
-    We need to collect the SOCRATES criteria (Site, Onset, Character, Radiation, Associated symptoms, Time course, Exacerbating/relieving factors, Severity).
+    prompt = """You are an empathetic wellness educator. The user has mentioned a physical symptom.
+    Your goal is to understand their symptom better by asking ONE very natural, conversational follow-up question.
+    DO NOT interrogate the user. DO NOT ask a list of multiple questions at once.
+    Instead of rigidly following a medical checklist, just ask whatever feels most natural to keep the conversation flowing smoothly.
     
-    Review the conversation history. If any SOCRATES criteria are missing, ask exactly ONE follow-up question to clarify the missing piece.
-    If all or most of the criteria have been gathered, respond with the exact word: "READY_FOR_EDUCATION"
-    Keep your questions empathetic and simple."""
+    If you feel you have enough context to provide educational information, OR if the user is explicitly asking for advice/treatment, respond with the exact word: "READY_FOR_EDUCATION"."""
     
     msgs = list(messages) + [HumanMessage(content=prompt)]
     response = await llm.ainvoke(msgs)

@@ -34,9 +34,9 @@ async def router_node(state: AgentState):
     Decide which of the following agents should handle the user's latest query:
     - "off_topic": If the query is completely unrelated to healthcare, medicine, wellness, or biology (e.g. web security, coding, general trivia).
     - "mental_health": If the user discusses depression, anxiety, stress, or emotional struggles.
-    - "socrates": If the user is describing their own physical symptoms and we need to interview them or diagnose them.
+    - "evidence": If the user is asking for general medical knowledge, advice, guidelines, OR "what should I do about [symptom]". Route all treatment and advice queries here.
+    - "socrates": If the user is ONLY reporting a new physical symptom and we need to interview them to learn more before we can give advice.
     - "rxnav": If the user is asking specifically about drug interactions between medications.
-    - "evidence": If the user is asking a general medical knowledge question (e.g., guidelines, treatments).
 
     Respond with exactly ONE word: "off_topic", "mental_health", "socrates", "rxnav", or "evidence"."""
     
