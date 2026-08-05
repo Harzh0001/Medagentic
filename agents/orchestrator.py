@@ -11,7 +11,7 @@ from agents.rxnav_agent import run_rxnav
 from agents.evidence_agent import run_evidence
 from agents.mental_health_agent import run_mental_health
 from agents.translator_agent import run_translator
-from db.timeline import add_symptom
+from db.database import add_symptom
 
 # 1. Define State
 class AgentState(TypedDict):

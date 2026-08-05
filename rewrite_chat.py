@@ -1,4 +1,6 @@
-import sys
+import os
+
+CHAT_CONTENT = r'''import sys
 try:
     __import__('pysqlite3')
     import sys
@@ -506,3 +508,7 @@ else:
                         import traceback
                         st.error(f"An error occurred while answering your question: {exc}")
                         st.code(traceback.format_exc())
+'''
+
+with open('ui/chat.py', 'w', encoding='utf-8') as f:
+    f.write(CHAT_CONTENT)
