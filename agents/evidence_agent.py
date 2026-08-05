@@ -38,8 +38,36 @@ def _build_messages(query: str, articles: list[dict]) -> list[dict]:
     ]
 
 
+async def _extract_keywords(query: str) -> str:
+    body = {
+        "model": settings.zen_model,
+        "messages": [
+            {
+                "role": "system", 
+                "content": "You are a medical search query extractor. Extract 2-4 essential medical keywords from the user's question for a PubMed search. Correct any spelling mistakes or typos (e.g. 'correa' -> 'chorea'). Output ONLY the keywords separated by spaces, nothing else."
+            },
+            {"role": "user", "content": query}
+        ],
+        "temperature": 0.0,
+        "max_tokens": 50,
+    }
+    headers = {
+        "Authorization": f"Bearer {settings.zen_api_key}",
+        "Content-Type": "application/json",
+    }
+    try:
+        url = f"{settings.zen_base_url}/chat/completions" if settings.zen_base_url else "https://api.openai.com/v1/chat/completions"
+        async with httpx.AsyncClient() as client:
+            r = await client.post(url, json=body, headers=headers, timeout=10)
+            r.raise_for_status()
+        return r.json()["choices"][0]["message"]["content"].strip()
+    except Exception:
+        return query
+
+
 async def answer(query: str):
-    pmids = await search_pubmed(query, settings.top_k)
+    search_query = await _extract_keywords(query)
+    pmids = await search_pubmed(search_query, settings.top_k)
     articles = await fetch_abstracts(pmids)
 
     if not articles:
