@@ -43,8 +43,16 @@ _collection = None
 def _get_embedder():
     global _embedder
     if _embedder is None:
-        from sentence_transformers import SentenceTransformer
-        _embedder = SentenceTransformer(EMBED_MODEL)
+        # Use FastEmbed (pure CPU, ONNX, zero PyTorch) for lightweight embeddings
+        from fastembed import TextEmbedding
+        class FastEmbedWrapper:
+            def __init__(self):
+                self.model = TextEmbedding(model_name="BAAI/bge-small-en-v1.5")
+            def embed_documents(self, texts):
+                return [list(e) for e in self.model.embed(texts)]
+            def embed_query(self, text):
+                return list(next(self.model.embed([text])))
+        _embedder = FastEmbedWrapper()
     return _embedder
 
 def _get_collection():
@@ -142,7 +150,7 @@ def ingest_text(text: str, source: str, section: str = "Full document") -> int:
     col.add(
         ids=[i for i, _ in todo],
         documents=[c["text"] for _, c in todo],
-        embeddings=embedder.encode([c["text"] for _, c in todo]).tolist(),
+        embeddings=embedder.embed_documents([c["text"] for _, c in todo]),
         metadatas=[{"source": c["source"], "section": c["section"], "chunk": c["chunk"]}
                    for _, c in todo],
     )
@@ -155,7 +163,7 @@ def retrieve(question: str, k: int = TOP_K):
     if col.count() == 0:
         return None
     query = clean_query(question)
-    emb = _get_embedder().encode([query]).tolist()[0]
+    emb = _get_embedder().embed_query(query)
     res = col.query(query_embeddings=[emb], n_results=k)
     out = []
     for i in range(len(res["ids"][0])):
