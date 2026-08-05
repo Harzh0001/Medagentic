@@ -305,8 +305,8 @@ header {visibility: hidden;}
 st.markdown(CSS, unsafe_allow_html=True)
 
 # MEDICAL CROSS SVG
-CROSS_SVG = """<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path d="M11 3h2v6h6v2h-6v6h-2v-6H5V11h6V3z"/>
+CROSS_SVG = """<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M10.5 3H13.5V9.5H20V12.5H13.5V19H10.5V12.5H4V9.5H10.5V3Z"/>
 </svg>"""
 
 def render_top_nav():
