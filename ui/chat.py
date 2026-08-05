@@ -1,4 +1,3 @@
-import httpx
 import streamlit as st
 from pathlib import Path
 import sys as _sys
@@ -52,11 +51,12 @@ if code_param and not st.session_state.logged_in:
             "redirect_uri": settings.google_redirect_uri,
             "grant_type": "authorization_code",
         }
-        resp = httpx.post(token_url, data=token_data)
+        import requests
+        resp = requests.post(token_url, data=token_data)
         if resp.status_code == 200:
             access_token = resp.json().get("access_token")
             # Fetch user info
-            user_info_resp = httpx.get(
+            user_info_resp = requests.get(
                 "https://www.googleapis.com/oauth2/v1/userinfo",
                 headers={"Authorization": f"Bearer {access_token}"}
             )
@@ -452,37 +452,39 @@ else:
             with st.chat_message("assistant"):
                 with st.spinner("Analyzing and answering…"):
                     try:
-                        # Use environment variable for deployment, fallback to localhost
-                        import os
-                        api_base = os.getenv("API_URL", "http://localhost:8000")
+                        # Run LangGraph AI directly inside Streamlit
+                        import asyncio
+                        from agents.orchestrator import run_chat
                         
-                        r = httpx.post(
-                            f"{api_base}/v1/chat",
-                            json={
-                                "message": query, 
-                                "thread_id": st.session_state.thread_id,
-                                "language": st.session_state.language
-                            },
-                            timeout=90,
+                        answer, citations, mode = asyncio.run(
+                            run_chat(
+                                message=query,
+                                thread_id=st.session_state.thread_id,
+                                language=st.session_state.language
+                            )
                         )
-                        r.raise_for_status()
-                        data = r.json()
-                        st.markdown(data["answer"])
                         
-                        if data.get("citations"):
-                            with st.expander(f"Sources ({len(data['citations'])})"):
-                                for c in data["citations"]:
+                        # Apply disclaimer
+                        disclaimer = "Educational decision-support output — not medical advice and not a diagnosis."
+                        if mode == "emergency":
+                            disclaimer = "⚠️ EMERGENCY TRIAGE ACTIVATED. SEEK IMMEDIATE MEDICAL ATTENTION."
+                            
+                        st.markdown(answer)
+                        
+                        if citations:
+                            with st.expander(f"Sources ({len(citations)})"):
+                                for c in citations:
                                     if "url" in c:
                                         st.markdown(f"- [{c['title']}]({c['url']})")
                                     else:
                                         st.markdown(f"- {c['label']} {c['source']} — {c['section']}")
-                        st.caption(data["disclaimer"])
+                        st.caption(disclaimer)
                         
                         st.session_state.messages.append({
                             "role": "assistant",
-                            "content": data["answer"],
-                            "citations": data.get("citations", []),
-                            "disclaimer": data.get("disclaimer", "")
+                            "content": answer,
+                            "citations": citations,
+                            "disclaimer": disclaimer
                         })
                         
                         st.rerun() # Refresh to update timeline
