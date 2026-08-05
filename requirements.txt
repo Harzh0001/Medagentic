@@ -1,14 +1,10 @@
---extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.3.1+cpu
-requests==2.32.3
-pydantic==2.7.4
-pydantic-settings==2.3.4
-python-dotenv==1.0.1
-streamlit==1.36.0
-chromadb==0.5.0
-pysqlite3-binary>=0.5.4.post2
-sentence-transformers==3.0.1
-pymupdf==1.24.8
-langchain==0.2.14
-langchain-openai==0.1.22
-langgraph==0.1.19
+requests>=2.31.0
+pydantic>=2.7.0
+pydantic-settings>=2.3.0
+python-dotenv>=1.0.0
+streamlit>=1.35.0
+chromadb>=0.5.0
+pysqlite3-binary>=0.5.4
+langchain>=0.2.14
+langchain-openai>=0.1.22
+langgraph>=0.1.19
