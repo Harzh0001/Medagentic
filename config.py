@@ -11,8 +11,9 @@ class Settings(BaseSettings):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        # If using an OpenCode base URL, force it to the correct Zen gateway URL
         if self.zen_base_url and "opencode.ai" in self.zen_base_url:
-            self.zen_base_url = None
+            self.zen_base_url = "https://opencode.ai/zen/v1"
 
     pubmed_base: str = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
     top_k: int = 6
