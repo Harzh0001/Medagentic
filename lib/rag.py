@@ -181,11 +181,12 @@ def retrieve(question: str, k: int = TOP_K):
 # ---------------------------------------------------------------- answer ---
 def _call_llm(system: str, user: str, temperature: float = 0.2,max_tokens: int = 1200) -> str:
     load_dotenv(PROJECT_ROOT / ".env")
+    from config import settings
     client = OpenAI(
-        api_key=os.getenv("ZEN_API_KEY"),
-        base_url=os.getenv("ZEN_BASE_URL", "https://api.opencode.ai/v1"),
+        api_key=settings.zen_api_key,
+        base_url=settings.zen_base_url,
     )
-    model = os.getenv("ZEN_MODEL", "deepseek-v4-flash-free")
+    model = settings.zen_model
     resp = client.chat.completions.create(
         model=model,
         messages=[
